@@ -1,6 +1,5 @@
 #include "trem.h"
 #include <QtCore>
-#include <QDebug>
 
 //Construtor
 Trem::Trem(int ID, int x, int y, std::vector<pthread_mutex_t*> trem, pthread_cond_t* condition){
@@ -50,7 +49,6 @@ void Trem::run(){
                         pthread_mutex_lock(mutexes[1]);
                         pthread_mutex_lock(mutexes[5]);
 
-                        qDebug() << "Mutexes 1 & 5 are with train 1";
                     }
                     if(x == 300) {
                         //pthread_mutex_lock(mutexes[5]);
@@ -62,7 +60,6 @@ void Trem::run(){
                 if(y==300){
                     //pthread_mutex_unlock(&mut1);
                      pthread_mutex_unlock(mutexes[1]);
-                     qDebug() << "Mutex 1 is free from train 1";
                 }
                 y+=10;
             }
@@ -99,19 +96,16 @@ void Trem::run(){
                         }
                         //pthread_mutex_lock(&mut3);
                         pthread_mutex_lock(mutexes[3]);
-                        qDebug() << "Mutex 3 is with train 2";
                     }
                     if(x==480){
                         //pthread_mutex_unlock(&mut2);
                          pthread_mutex_unlock(mutexes[2]);
-                         qDebug() << "Mutex 2 is no longer with train 2";
 
 
                     }
                     if(x==570){
                         //pthread_mutex_lock(&mut6);
                          pthread_mutex_lock(mutexes[6]);
-                         qDebug() << "Mutex 6 is with train 2";
                     }
                     x+=10;
                 }
@@ -149,7 +143,6 @@ void Trem::run(){
                     }
                     //pthread_mutex_lock(&mut5);
                      pthread_mutex_lock(mutexes[5]);
-                     qDebug() << "Mutex 5 is with train 2";
                 }
                 x-=10;
             }
@@ -170,9 +163,7 @@ void Trem::run(){
                     } else{
                         pthread_mutex_unlock(mutexes[3]);
                     }
-                    qDebug() << "Trying to get mutex 2 to train 2";
                     pthread_mutex_lock(mutexes[2]);
-                    qDebug() << "Mutex 2 is with train 2";
                 }
                 y-=10;
             }
@@ -214,7 +205,6 @@ void Trem::run(){
                     //pthread_mutex_lock(&mut6);
                      pthread_mutex_lock(mutexes[4]);
                      pthread_mutex_lock(mutexes[6]);
-                     qDebug() << "Mutexes 4 & 6 are with train 3";
                 }
                 x-=10;
             }
@@ -248,7 +238,6 @@ void Trem::run(){
                     }
                     //pthread_mutex_lock(&mut0);
                     pthread_mutex_lock(mutexes[0]);
-                    qDebug() << "Mutex 0 is with train 4";
                     //pthread_mutex_lock(mutexes[2]);
                 }
                 x+=10;
@@ -256,22 +245,16 @@ void Trem::run(){
             else if (x == 460 && y < 280){
                 if(y==260){
                     if(pthread_mutex_trylock(mutexes[1])){
-                        qDebug() << "Mutex 1 is locked";
                         if(pthread_mutex_trylock(mutexes[5])){
-                            qDebug() << "Mutex 5 is locked";
                             break;
                         } else {
                             pthread_mutex_unlock(mutexes[5]);
-                            qDebug() << "Mutex 5 is free";
                         }
                     } else {
                         pthread_mutex_unlock(mutexes[1]);
-                        qDebug() << "Mutex 1 is free";
                     }
                     //pthread_mutex_lock(&mut2);
-                    qDebug() << "Trying to get mutex 2 to train 4";
                     pthread_mutex_lock(mutexes[2]);
-                    qDebug() << "Mutex 2 is with train 4";
                     //pthread_mutex_lock(mutexes[1]);
                 }
                 y+=10;
@@ -283,16 +266,11 @@ void Trem::run(){
                 }
                 if(x==340){
                     // pthread_mutex_lock(&mut1);
-                    qDebug() << "Trying to get mutex 1 to train 4";
                     pthread_mutex_lock(mutexes[1]);
-                    qDebug() << "Mutex 1 is with train 4";
                 }
                 if(x==300){
                     // pthread_mutex_unlock(&mut2);
                     pthread_mutex_unlock(mutexes[2]);
-                    qDebug() << "Mutex 2 is no longer with train 4";
-                    qDebug() << "We're at coordinates (";
-                    qDebug() << x << ", " << y << ")";
                 }
                 x-=10;
             }
@@ -300,7 +278,6 @@ void Trem::run(){
                 if(y==260){
                     // pthread_mutex_unlock(&mut1);
                     pthread_mutex_unlock(mutexes[1]);
-                    qDebug() << "Mutex 1 is no longer with train 4";
                 }
                 y-=10;
             }
@@ -334,7 +311,6 @@ void Trem::run(){
                     }
                     // pthread_mutex_lock(&mut4);
                     pthread_mutex_lock(mutexes[4]);
-                    qDebug() << "Mutex 4 is with train 5";
                     //pthread_mutex_lock(mutexes[3]);
                 }
                 y+=10;
@@ -358,7 +334,6 @@ void Trem::run(){
                     }
                    // pthread_mutex_lock(&mut3);
                     pthread_mutex_lock(mutexes[3]);
-                    qDebug() << "Mutex 3 is with train 5";
                 }
                 if(x==570){
                    // pthread_mutex_unlock(&mut4);
@@ -367,7 +342,6 @@ void Trem::run(){
                 if(x==480){
                    // pthread_mutex_lock(&mut0);
                     pthread_mutex_lock(mutexes[0]);
-                    qDebug() << "Mutex 0 is with train 5";
                 }
                 x-=10;
             }

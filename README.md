@@ -11,11 +11,11 @@ thuannyba@gmail.com
 
 
 # Descrição do Projeto
-    Este projeto consiste em fazer com que 5 trens andem pelo o mesmo espaço, sem colidir um com o outro, de maneira que cada um tenha a sua hora de passar e esta seja respeitada. <\br>
+ Este projeto consiste em fazer com que 5 trens andem pelo o mesmo espaço, sem colidir um com o outro, de maneira que cada um tenha a sua hora de passar e esta seja respeitada. <\br>
 
-    Há 7 regiões críticas, onde é passível de se ter colisões e deadlocks. <\br>
+  Há 7 regiões críticas, onde é passível de se ter colisões e deadlocks. <\br>
     
-    O objetivo do Trabalho é evitar as colisões e os deadlocks. 
+  O objetivo do Trabalho é evitar as colisões e os deadlocks. 
     
 
 # Descrição do tratamento de deadlocks e colisões
